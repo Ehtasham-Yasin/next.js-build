@@ -1,0 +1,36 @@
+name: Next JS with caching & artifacte
+
+on: 
+  push:
+    branches: [ main ]
+
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v6.0.3
+
+      - name: set node js 
+        uses: actions/setup-node@v6.4.0
+        with:
+            node-version: 22.x
+            cache: "npm"
+
+      - name: install dependencies
+        run: npm install
+
+      - name: next js build
+        run: npm run build
+
+      - name: store build on articate
+        uses: actions/upload-artifact@v7.0.1
+        with:
+          name: next js
+          path: out/
+          
+        
+      
+      
